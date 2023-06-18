@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="145">
 	<RootPaths>
-		<ProjectRoot>../../</ProjectRoot>
-		<SourceFilesRoot>../../.cache/Windows/</SourceFilesRoot>
+		<ProjectRoot>../..</ProjectRoot>
+		<SourceFilesRoot>../../.cache/Windows</SourceFilesRoot>
 		<SoundBanksRoot>.</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
 		<ExternalSourcesOutputRoot>.</ExternalSourcesOutputRoot>
@@ -22,6 +22,32 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 		</SoundBank>
+		<SoundBank Id="3657742645" Type="User" Language="SFX" Hash="{4D3A3EFF-704C-E8C1-8398-29AD2B16CB13}">
+			<ShortName>General_SoundBank</ShortName>
+			<Path>General_SoundBank.bnk</Path>
+			<Media>
+				<File Id="79360283" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Plaia 42.wav</ShortName>
+					<CachePath>SFX/Plaia 42_D79FB2B7.wem</CachePath>
+				</File>
+				<File Id="240754933" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MACK Liquid Splash Water Small Low.wav</ShortName>
+					<CachePath>SFX/MACK Liquid Splash Water Small Low_D50F14D4.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="3991942870" Name="Music" MaxAttenuation="100" DurationType="OneShot" DurationMin="484.57697" DurationMax="484.57697">
+					<MediaRefs>
+						<MediaRef Id="79360283"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="541470702" Name="Player_Movement" DurationType="OneShot" DurationMin="0.9309507" DurationMax="0.9309507">
+					<MediaRefs>
+						<MediaRef Id="240754933"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+		</SoundBank>
 	</SoundBanks>
-	<FileHash>{18BD9679-7E45-DB51-AE55-D0A3E534691E}</FileHash>
+	<FileHash>{1A7BB3D3-9F64-A907-584D-7F016964E1B8}</FileHash>
 </SoundBanksInfo>

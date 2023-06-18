@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{2130C3AB-92D8-4103-964B-DAF82DA6EC1D}" SchemaVersion="110">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{2130C3AB-92D8-4103-964B-DAF82DA6EC1D}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{2130C3AB-92D8-4103-964B-DAF82DA6EC1D}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="Player" ID="{02D44C0F-1606-454E-86F1-05988967E114}" ShortID="751569149">
+					<ChildrenList>
+						<Event Name="Player_Movement" ID="{9720B34F-D359-40B3-80FB-1D4E2070ADCC}">
+							<ChildrenList>
+								<Action Name="" ID="{7EBA84E2-9375-40D1-9480-C4CB08FC8CC3}" ShortID="470912018">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="New Sound SFX" ID="{97818B2E-FEEE-4A3C-BBD3-18037DB13E54}" WorkUnitID="{48CBBF14-BD6E-49D2-87ED-D37DE95D2A82}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Music" ID="{8450BE0D-7473-430E-9167-E5A22447DEFB}">
+							<ChildrenList>
+								<Action Name="" ID="{F1CB9AF4-7A9F-4519-9DAB-658856D937B1}" ShortID="634718085">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Test Music" ID="{BF58D786-2981-467D-A87C-FDADA5AF90C8}" WorkUnitID="{C15344AC-C52C-4288-80F2-BC39A4A6C598}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>

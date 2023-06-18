@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{48CBBF14-BD6E-49D2-87ED-D37DE95D2A82}" SchemaVersion="110">
 	<AudioObjects>
-		<WorkUnit Name="Default Work Unit" ID="{48CBBF14-BD6E-49D2-87ED-D37DE95D2A82}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{48CBBF14-BD6E-49D2-87ED-D37DE95D2A82}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="Player_SFX" ID="{DAB8951B-7294-4BDC-BBFC-F58C5B0ADB04}" ShortID="10670201">
+					<ChildrenList>
+						<Sound Name="New Sound SFX" ID="{97818B2E-FEEE-4A3C-BBD3-18037DB13E54}" ShortID="310245015">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A09C72AC-129E-45EE-8BB5-0EEB23F0A71F}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{02BD653E-6237-460A-87C3-9555ABCC790B}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="MACK Liquid Splash Water Small Low" ID="{0A570B47-D02C-4E3D-8A31-9FB17A3F8DEE}">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.0567243981609775"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.277661944871938"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimBegin" Type="Real64" Value="0.198535393563421"/>
+										<Property Name="TrimEnd" Type="Real64" Value="1.12948612150496"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>MACK Liquid Splash Water Small Low.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="240754933"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="MACK Liquid Splash Water Small Low" ID="{0A570B47-D02C-4E3D-8A31-9FB17A3F8DEE}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
 	</AudioObjects>
 </WwiseDocument>
