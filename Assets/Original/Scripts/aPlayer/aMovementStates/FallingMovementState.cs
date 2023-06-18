@@ -64,25 +64,25 @@ public class FallingMovementState : PlayerMovementState
 
         if (PlayerDelegatesContainer.IsBufferGroundJumpTriggering())
         {
-            PlayerDelegatesContainer.EventEntryNewMovementState?.Invoke(PlayerMovementStateType.GroundJumping);
+            PlayerDelegatesContainer.EventEntryNewMovementState(PlayerMovementStateType.GroundJumping);
             return true;
         }
 
         if (PlayerDelegatesContainer.IsGrounded())
         {
-            PlayerDelegatesContainer.EventEntryNewMovementState?.Invoke(PlayerMovementStateType.Idle);
+            PlayerDelegatesContainer.EventEntryNewMovementState(PlayerMovementStateType.Idle);
             return true;
         }
 
         if (PlayerDelegatesContainer.IsCoyoteGroundJumpTriggering())
         {
-            PlayerDelegatesContainer.EventEntryNewMovementState?.Invoke(PlayerMovementStateType.GroundJumping);
+            PlayerDelegatesContainer.EventEntryNewMovementState(PlayerMovementStateType.GroundJumping);
             return true;
         }
 
         if (PlayerDelegatesContainer.IsDashTriggering())
         { 
-            PlayerDelegatesContainer.EventEntryNewMovementState?.Invoke(PlayerMovementStateType.Dash);
+            PlayerDelegatesContainer.EventEntryNewMovementState(PlayerMovementStateType.Dash);
             return true;
         }
 

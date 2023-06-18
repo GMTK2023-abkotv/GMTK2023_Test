@@ -4,7 +4,6 @@ using UnityEngine;
 public static class PlayerDelegatesContainer
 {
     public static Func<bool> IsGrounded;
-    public static Func<bool> IsCollidingAbove;
     public static Func<bool> IsCollidingSides;
     public static Func<bool> IsDashTriggering;
     public static Func<bool> IsGroundJumpTrigering;

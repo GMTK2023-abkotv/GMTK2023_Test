@@ -109,7 +109,7 @@ public class PlayerMovementStateMachine : MonoBehaviour
         }
 
         _currentState.GetDisplacement(out _currentDisplacement);
-        _playerController.Move(_currentDisplacement);
+        _playerController.ApplyDisplacement(_currentDisplacement);
     }
 
     /// <summary>
@@ -132,7 +132,7 @@ public class PlayerMovementStateMachine : MonoBehaviour
         }
 
         _currentState.GetDisplacement(out _currentDisplacement);
-        _playerController.Move(_currentDisplacement);
+        _playerController.ApplyDisplacement(_currentDisplacement);
     }
 
     void Update()
@@ -150,7 +150,7 @@ public class PlayerMovementStateMachine : MonoBehaviour
         }
 
         _currentState.GetDisplacement(out _currentDisplacement);
-        _playerController.Move(_currentDisplacement);
+        _playerController.ApplyDisplacement(_currentDisplacement);
     }
 
     void OnTeleportingMovementEntry()

@@ -52,6 +52,13 @@ public class WalkingMovementState : PlayerMovementState
         return false;
     }
 
+    public override void OnTransition()
+    {
+        base.OnTransition();
+
+        _currentSpeed = 0;
+    }
+
     public override void GetDisplacement(out float3 displacement)
     {
         _currentSpeed += _acceleration * Time.deltaTime;

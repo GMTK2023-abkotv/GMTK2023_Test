@@ -89,7 +89,7 @@ public class JumpGroundMovementState : PlayerMovementState
             return true;
         }
 
-        if ( PlayerDelegatesContainer.IsCollidingAbove() || _currentSpeed < 0)
+        if (_currentSpeed < 0)
         {
             PlayerDelegatesContainer.EventEntryNewMovementState?.Invoke(PlayerMovementStateType.Falling);
             return true;
@@ -131,8 +131,7 @@ public class JumpGroundMovementState : PlayerMovementState
             return false;
         }
 
-        if (PlayerDelegatesContainer.IsCollidingAbove() || 
-            !PlayerDelegatesContainer.IsGrounded())
+        if (!PlayerDelegatesContainer.IsGrounded())
         {
             return false;
         }
@@ -143,11 +142,6 @@ public class JumpGroundMovementState : PlayerMovementState
     bool IsCoyoteGroundJumpTriggering()
     {
         if (!_jumpCommand.IsTriggered)
-        {
-            return false;
-        }
-
-        if (PlayerDelegatesContainer.IsCollidingAbove())
         {
             return false;
         }

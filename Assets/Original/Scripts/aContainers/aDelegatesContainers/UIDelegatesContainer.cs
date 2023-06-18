@@ -6,9 +6,7 @@ public static class UIDelegatesContainer
 {
     public static Func<float> GetSceneLoadingProgress;
     public static Func<GameObject> GetGroundedIndicator;
-    public static Func<GameObject> GetLeftCollisionIndicator;
-    public static Func<GameObject> GetAboveCollisionIndicator;
-    public static Func<GameObject> GetRightCollisionIndicator;
+    public static Func<GameObject> GetSidesCollisionIndicator;
     public static Func<GameObject> GetDashCoolDownIndicator;
 
     public static Action EscapePressed;

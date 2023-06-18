@@ -6,6 +6,13 @@ public class PlayerController : MonoBehaviour
 {
     CharacterController _controller;
 
+    GameObject _groundedIndicator;
+    GameObject _sidesCollisionIndicator;
+
+    bool _isGrounded;
+    bool _ignoringGround;
+    bool _isCollidedSides;
+
     void Awake()
     {
         TryGetComponent(out _controller);
@@ -13,8 +20,10 @@ public class PlayerController : MonoBehaviour
         PlayerDelegatesContainer.GetPlayerController += GetThis;
 
         PlayerDelegatesContainer.IsGrounded += IsGrounded;
-        PlayerDelegatesContainer.IsCollidingAbove += IsCollidingAbove;
         PlayerDelegatesContainer.IsCollidingSides += IsCollidingSides;
+
+        PlayerDelegatesContainer.EventGroundedIgnoranceStart += OnGroundedIgnoranceStart;
+        PlayerDelegatesContainer.EventGroundedIgnoranceEnd += OnGroundedIgnoranceEnd;
     }
 
     void OnDestroy()
@@ -22,8 +31,16 @@ public class PlayerController : MonoBehaviour
         PlayerDelegatesContainer.GetPlayerController -= GetThis;
 
         PlayerDelegatesContainer.IsGrounded -= IsGrounded;
-        PlayerDelegatesContainer.IsCollidingAbove -= IsCollidingAbove;
         PlayerDelegatesContainer.IsCollidingSides -= IsCollidingSides;
+        
+        PlayerDelegatesContainer.EventGroundedIgnoranceStart -= OnGroundedIgnoranceStart;
+        PlayerDelegatesContainer.EventGroundedIgnoranceEnd -= OnGroundedIgnoranceEnd;
+    }
+
+    void Start()
+    {
+        _groundedIndicator = UIDelegatesContainer.GetGroundedIndicator();
+        _sidesCollisionIndicator = UIDelegatesContainer.GetSidesCollisionIndicator();
     }
 
     PlayerController GetThis()
@@ -33,19 +50,58 @@ public class PlayerController : MonoBehaviour
 
     bool IsGrounded()
     {
-        return _controller.isGrounded;
-    }
-    bool IsCollidingAbove()
-    {
-        return _controller.collisionFlags == CollisionFlags.Above;
+        return _isGrounded;
     }
     bool IsCollidingSides()
     {
-        return _controller.collisionFlags == CollisionFlags.Sides;
+        return _isCollidedSides;
     }
 
-    public void Move(float3 displacement)
+    void OnGroundedIgnoranceStart()
     {
-        _controller.Move(displacement);
+        Debug.Log("ignoring ground");
+        _ignoringGround = true;
+        _isGrounded = false;
+    }
+
+    void OnGroundedIgnoranceEnd()
+    {
+        _ignoringGround = false;
+    }
+
+    public void ApplyDisplacement(float3 displacement)
+    {
+        if (math.all(displacement == float3.zero))
+        {
+            return;
+        }
+
+        displacement.y = -0.1f;
+        CollisionFlags flags = _controller.Move(displacement);
+
+        if (_ignoringGround)
+        { 
+            _isGrounded = flags == CollisionFlags.Below;
+        }
+
+        _isCollidedSides = flags == CollisionFlags.Sides;
+
+        if (_groundedIndicator.activeSelf && !_isGrounded)
+        {
+            _groundedIndicator.SetActive(false);
+        }
+        else if (!_groundedIndicator.activeSelf && _isGrounded)
+        {
+            _groundedIndicator.SetActive(true);
+        }
+
+        if (_sidesCollisionIndicator.activeSelf && !_isCollidedSides)
+        {
+            _sidesCollisionIndicator.SetActive(false);
+        }
+        else if (!_sidesCollisionIndicator.activeSelf && _isCollidedSides)
+        { 
+            _sidesCollisionIndicator.SetActive(true);
+        }
     }
 }
