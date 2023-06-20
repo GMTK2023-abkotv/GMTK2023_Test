@@ -1,21 +1,19 @@
 using System;
 using UnityEngine;
+using Unity.Mathematics;
 
 public static class PlayerDelegatesContainer
 {
     public static Func<bool> IsGrounded;
     public static Func<bool> IsCollidingSides;
+
     public static Func<bool> IsDashTriggering;
     public static Func<bool> IsGroundJumpTrigering;
     public static Func<bool> IsCoyoteGroundJumpTriggering;
     public static Func<bool> IsBufferGroundJumpTriggering;
 
     public static Func<float> GetTimeSinceLastGrounded;
-    public static Func<float> GetSlopeAngleBelowRaycast;
     public static Func<float> GetFallingGravityAmount;
-    public static Func<float> GetSlopeAngleMinThreshold;
-    public static Func<float> GetSlopeAngleMaxThreshold;
-    public static Func<float> GetFallSpeed;
 
     public static Func<Transform> GetTransform;
     public static Func<PlayerMovementStateType> GetPreviousStateType;
@@ -23,9 +21,10 @@ public static class PlayerDelegatesContainer
     public static Func<PlayerController> GetPlayerController;
     public static Func<PlayerMovementState> GetInitialMovementState;
 
-
     public static Action<PlayerMovementStateType> EventEntryNewMovementState;
     public static Action<PlayerMovementStateType> EventFinalFrameMovementState;
+
+    public static Action<float3> EventDashFromWalking;
 
     #region LifeDeath
     public static Action<CheckPoint> EventSpawnStart;

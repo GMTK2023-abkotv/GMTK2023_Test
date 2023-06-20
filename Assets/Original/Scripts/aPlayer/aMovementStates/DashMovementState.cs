@@ -23,6 +23,9 @@ public class DashMovementState : PlayerMovementState
     bool _isInCoolDown;
     int _enteredDashThroughZonesCount;
 
+    float3 _movementDirection;
+    bool _isFromWalking;
+
     void Awake()
     {
         _enteredDashThroughZonesCount = 0;
@@ -32,12 +35,14 @@ public class DashMovementState : PlayerMovementState
         PlayerDelegatesContainer.EventPlayerOnTriggerExit2D += OnPlayerTriggerExit2D;
 
         PlayerDelegatesContainer.IsDashTriggering += IsDashTriggering;
+
+        PlayerDelegatesContainer.EventDashFromWalking += OnDashFromWalking;
     }
 
     void Start()
     {
         _dashCommandReference = InputDelegatesContainer.GetDashCommand();
-        // _coolDownIndicator = UIDelegatesContainer.GetDashCoolDownIndicator();
+        _coolDownIndicator = UIDelegatesContainer.GetDashCoolDownIndicator();
     }
 
     void OnDestroy()
@@ -47,6 +52,8 @@ public class DashMovementState : PlayerMovementState
         PlayerDelegatesContainer.EventPlayerOnTriggerExit2D -= OnPlayerTriggerExit2D;
 
         PlayerDelegatesContainer.IsDashTriggering -= IsDashTriggering;
+
+        PlayerDelegatesContainer.EventDashFromWalking -= OnDashFromWalking;
     }
 
     void OnJustGotGrounded()
@@ -83,6 +90,11 @@ public class DashMovementState : PlayerMovementState
         }
         _movedDistance = 0;
         _isDashExhausted = true;
+
+        if (_isFromWalking)
+        {
+            _movementDirection = math.forward();
+        }
     }
 
     public override bool CheckForTransitions()
@@ -90,15 +102,6 @@ public class DashMovementState : PlayerMovementState
         if (base.CheckForTransitions())
         {
             return true;
-        }
-
-        if (IsCollidingInFacingDirection())
-        {
-            // if (!PlayerQueriesContainer.QueryIsCollidingWithDashThroughZone(direction))
-            // { 
-                EndDashState();
-                return true;
-            // }
         }
 
         if (_enteredDashThroughZonesCount == 0 && _movedDistance > _distanceOfDash)
@@ -124,14 +127,15 @@ public class DashMovementState : PlayerMovementState
 
     public override void OnTransition()
     {
+        _isFromWalking = false;
         PlayerDelegatesContainer.EventGroundedIgnoranceEnd?.Invoke();
     }
 
     public override void GetDisplacement(out float3 displacement)
     {
         displacement = float3.zero;
-        displacement.x = _dashSpeed * Time.deltaTime;
-        _movedDistance += displacement.x;
+        displacement = _movementDirection * _dashSpeed * Time.deltaTime;
+        _movedDistance += math.length(displacement);
     }
 
     bool IsDashTriggering()
@@ -146,24 +150,14 @@ public class DashMovementState : PlayerMovementState
             return false;
         }
 
-        if (IsCollidingInFacingDirection())
-        {
-            // if (!PlayerQueriesContainer.QueryIsCollidingWithDashThroughZone(direction))
-            // { 
-                return false;
-            // }
-        }
         return true;
     }
 
-    bool IsCollidingInFacingDirection()
+    void OnDashFromWalking(float3 movementDirection)
     {
-        return false;
-            // _playerCharacter.GetFacingDirection() == PlayerCharacter.FacingDirectionType.Left &&
-            // PlayerQueriesContainer.QueryIsCollidingToTheLeft()
-            // ||
-            // _playerCharacter.GetFacingDirection() == PlayerCharacter.FacingDirectionType.Right &&
-            // PlayerQueriesContainer.QueryIsCollidingToTheRight();
+        _movementDirection = movementDirection;
+        _isFromWalking = true;
+        Debug.Log("From walking");
     }
 
     IEnumerator DashCoolDown()

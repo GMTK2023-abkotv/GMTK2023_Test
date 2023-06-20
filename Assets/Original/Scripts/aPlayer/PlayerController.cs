@@ -71,37 +71,29 @@ public class PlayerController : MonoBehaviour
 
     public void ApplyDisplacement(float3 displacement)
     {
-        if (math.all(displacement == float3.zero))
-        {
-            return;
-        }
-
-        displacement.y = -0.1f;
         CollisionFlags flags = _controller.Move(displacement);
 
-        if (_ignoringGround)
-        { 
-            _isGrounded = flags == CollisionFlags.Below;
-        }
-
         _isCollidedSides = flags == CollisionFlags.Sides;
-
-        if (_groundedIndicator.activeSelf && !_isGrounded)
-        {
-            _groundedIndicator.SetActive(false);
-        }
-        else if (!_groundedIndicator.activeSelf && _isGrounded)
-        {
-            _groundedIndicator.SetActive(true);
-        }
-
         if (_sidesCollisionIndicator.activeSelf && !_isCollidedSides)
         {
             _sidesCollisionIndicator.SetActive(false);
         }
         else if (!_sidesCollisionIndicator.activeSelf && _isCollidedSides)
-        { 
+        {
             _sidesCollisionIndicator.SetActive(true);
+        }
+
+        if (!_ignoringGround)
+        { 
+            _isGrounded = flags == CollisionFlags.Below;
+            if (_groundedIndicator.activeSelf && !_isGrounded)
+            {
+                _groundedIndicator.SetActive(false);
+            }
+            else if (!_groundedIndicator.activeSelf && _isGrounded)
+            {
+                _groundedIndicator.SetActive(true);
+            }
         }
     }
 }

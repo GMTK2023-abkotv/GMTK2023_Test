@@ -22,13 +22,11 @@ public class FallingMovementState : PlayerMovementState
 
     void Awake()
     {
-        PlayerDelegatesContainer.GetFallSpeed += GetFallSpeed;
         PlayerDelegatesContainer.GetFallingGravityAmount += GetFallingGravityAmount;
     }
 
     protected void OnDestroy()
     {
-        PlayerDelegatesContainer.GetFallSpeed -= GetFallSpeed;
         PlayerDelegatesContainer.GetFallingGravityAmount -= GetFallingGravityAmount;
     }
 

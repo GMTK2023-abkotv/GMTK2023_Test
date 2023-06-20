@@ -39,11 +39,14 @@ public class ScenesController : MonoBehaviour
     }
 
     void StartLoadingSavedScene()
-    { 
+    {
 #if UNITY_EDITOR
-        _loadingScene = SceneManager.LoadSceneAsync(_sceneIndexToTest);
-        ApplicationDelegatesContainer.EventStartedLoadingNextScene?.Invoke();
-        return;
+        if (_sceneIndexToTest >= 0)
+        { 
+            _loadingScene = SceneManager.LoadSceneAsync(_sceneIndexToTest);
+            ApplicationDelegatesContainer.EventStartedLoadingNextScene?.Invoke();
+            return;
+        }
 #endif
         int _currentSceneIndex = PlayerPrefs.GetInt(PlayerPrefsContainer.LAST_SCENE_INDEX, -1);
         if (_currentSceneIndex < 0)

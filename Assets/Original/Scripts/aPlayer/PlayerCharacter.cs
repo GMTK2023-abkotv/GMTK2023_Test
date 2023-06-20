@@ -6,9 +6,6 @@ public class PlayerCharacter : MonoBehaviour
     float _modelRotationSpeedDeg;
 
     [SerializeField]
-    float _minimumDistanceToGroundToBeConsideredAirborne = 0.5f;
-
-    [SerializeField]
     Transform _modelTransformToRotate;
 
     #region EnumStates

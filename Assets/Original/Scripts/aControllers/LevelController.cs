@@ -6,8 +6,6 @@ public class LevelController : MonoBehaviour
     [SerializeField]
     float _delayBeforeSpawn;
 
-    bool _shouldInvokeEnvironmentChangeEvent;
-
     void Awake()
     {
         PlayerDelegatesContainer.EventDeath += OnPlayerDeath;
@@ -29,10 +27,5 @@ public class LevelController : MonoBehaviour
         PlayerDelegatesContainer.EventSpawnStart?.Invoke(validCheckPoint);
         yield return new WaitForSeconds(_delayBeforeSpawn);
         PlayerDelegatesContainer.EventSpawnEnd?.Invoke();
-    }
-
-    void OnEnvironmentChanged()
-    {
-        _shouldInvokeEnvironmentChangeEvent = true;
     }
 }

@@ -60,6 +60,6 @@ public class IdleMovementState : PlayerMovementState
 
     public override void GetDisplacement(out float3 displacement)
     {
-        displacement = float3.zero;
+        displacement = math.down() * 0.1f;
     }
 }

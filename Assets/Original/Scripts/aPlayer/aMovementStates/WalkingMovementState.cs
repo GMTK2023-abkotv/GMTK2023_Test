@@ -27,25 +27,26 @@ public class WalkingMovementState : PlayerMovementState
 
         if (!PlayerDelegatesContainer.IsGrounded())
         {
-            PlayerDelegatesContainer.EventEntryNewMovementState?.Invoke(PlayerMovementStateType.Falling);
+            PlayerDelegatesContainer.EventEntryNewMovementState(PlayerMovementStateType.Falling);
             return true;
         }
 
         if (PlayerDelegatesContainer.IsGroundJumpTrigering())
         {
-            PlayerDelegatesContainer.EventEntryNewMovementState?.Invoke(PlayerMovementStateType.GroundJumping);
-            return true;
-        }
-
-        if (PlayerDelegatesContainer.IsDashTriggering())
-        { 
-            PlayerDelegatesContainer.EventEntryNewMovementState?.Invoke(PlayerMovementStateType.Dash);
+            PlayerDelegatesContainer.EventEntryNewMovementState(PlayerMovementStateType.GroundJumping);
             return true;
         }
 
         if (!IsInputTriggeringAbility())
         {
-            PlayerDelegatesContainer.EventEntryNewMovementState?.Invoke(PlayerMovementStateType.Idle);
+            PlayerDelegatesContainer.EventEntryNewMovementState(PlayerMovementStateType.Idle);
+            return true;
+        }
+
+        if (PlayerDelegatesContainer.IsDashTriggering())
+        {
+            PlayerDelegatesContainer.EventDashFromWalking(_inputDirection);
+            PlayerDelegatesContainer.EventEntryNewMovementState(PlayerMovementStateType.Dash);
             return true;
         }
 
@@ -65,6 +66,7 @@ public class WalkingMovementState : PlayerMovementState
         _currentSpeed = Mathf.Clamp(_currentSpeed, 0, _maxSpeed);
 
         displacement = _inputDirection * _currentSpeed * Time.deltaTime;
+        displacement.y = -0.1f;
     }
 
     bool IsInputTriggeringAbility()
@@ -94,7 +96,6 @@ public class WalkingMovementState : PlayerMovementState
         _inputDirection = math.normalize(_inputDirection);
         return true;
     }
-
 
     public override string ToString()
     {

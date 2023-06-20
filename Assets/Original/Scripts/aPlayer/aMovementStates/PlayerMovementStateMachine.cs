@@ -27,8 +27,6 @@ public class PlayerMovementStateMachine : MonoBehaviour
     const int MAX_CHANGES_COUNT_IN_ONE_FRAME = 10;
     int _changesCountOneFrame = 0;
 
-    float _clearLogTimer = 0;
-
     bool _areAbilitiesActive;
 
     PlayerMovementState _currentState;
