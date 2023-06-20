@@ -40,7 +40,7 @@ public class IdleMovementState : PlayerMovementState
 
         if (PlayerDelegatesContainer.IsGroundJumpTrigering())
         {
-            PlayerDelegatesContainer.EventEntryNewMovementState.Invoke(PlayerMovementStateType.GroundJumping);
+            PlayerDelegatesContainer.EventEntryNewMovementState.Invoke(PlayerMovementStateType.Jumping);
             return true;
         }
 

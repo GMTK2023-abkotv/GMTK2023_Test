@@ -62,7 +62,7 @@ public class FallingMovementState : PlayerMovementState
 
         if (PlayerDelegatesContainer.IsBufferGroundJumpTriggering())
         {
-            PlayerDelegatesContainer.EventEntryNewMovementState(PlayerMovementStateType.GroundJumping);
+            PlayerDelegatesContainer.EventEntryNewMovementState(PlayerMovementStateType.Jumping);
             return true;
         }
 
@@ -74,7 +74,7 @@ public class FallingMovementState : PlayerMovementState
 
         if (PlayerDelegatesContainer.IsCoyoteGroundJumpTriggering())
         {
-            PlayerDelegatesContainer.EventEntryNewMovementState(PlayerMovementStateType.GroundJumping);
+            PlayerDelegatesContainer.EventEntryNewMovementState(PlayerMovementStateType.Jumping);
             return true;
         }
 

@@ -46,7 +46,7 @@ public class PlayerAnimationsController : MonoBehaviour
             case PlayerMovementStateType.Walking:
                 _stateToTransitionTo = STATE_NAME_RUN;
                 break;
-            case PlayerMovementStateType.GroundJumping:
+            case PlayerMovementStateType.Jumping:
                 _stateToTransitionTo = STATE_NAME_GROUND_JUMP;
                 break;
             case PlayerMovementStateType.Falling:

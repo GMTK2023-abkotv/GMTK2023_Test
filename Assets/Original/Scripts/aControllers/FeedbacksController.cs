@@ -49,7 +49,7 @@ public class FeedbacksController : MonoBehaviour
                 _walkingStateParticles.transform.SetParent(_playerTransform, false);
                 _walkingStateParticles.Play();
                 break;
-            case PlayerMovementStateType.GroundJumping:
+            case PlayerMovementStateType.Jumping:
                 _groundJumpParticles.transform.SetParent(_playerTransform, false);
                 _groundJumpParticles.Play();
                 break;
@@ -66,7 +66,7 @@ public class FeedbacksController : MonoBehaviour
                 _walkingStateParticles.transform.SetParent(_particlesParent, false);
                 _walkingStateParticles.Stop();
                 return;
-            case PlayerMovementStateType.GroundJumping:
+            case PlayerMovementStateType.Jumping:
                 _groundJumpParticles.transform.SetParent(_particlesParent, false);
                 return;
         }

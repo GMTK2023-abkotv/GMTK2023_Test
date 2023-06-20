@@ -9,9 +9,11 @@ public class WalkingMovementState : PlayerMovementState
     float _maxSpeed = 3;
 
     float3 _inputDirection;
-    float _currentSpeed;
+    float3 _currentVelocity;
 
     MoveCommand _moveCommand;
+
+    bool _isAccelerating;
 
     void Start()
     {
@@ -33,11 +35,13 @@ public class WalkingMovementState : PlayerMovementState
 
         if (PlayerDelegatesContainer.IsGroundJumpTrigering())
         {
-            PlayerDelegatesContainer.EventEntryNewMovementState(PlayerMovementStateType.GroundJumping);
+            PlayerDelegatesContainer.EventEntryNewMovementState(PlayerMovementStateType.Jumping);
             return true;
         }
 
-        if (!IsInputTriggeringAbility())
+        _isAccelerating = IsInputTriggeringAbility();
+
+        if (!_isAccelerating && math.lengthsq(_currentVelocity) == 0)
         {
             PlayerDelegatesContainer.EventEntryNewMovementState(PlayerMovementStateType.Idle);
             return true;
@@ -57,15 +61,19 @@ public class WalkingMovementState : PlayerMovementState
     {
         base.OnTransition();
 
-        _currentSpeed = 0;
+        _currentVelocity = float3.zero;
     }
 
     public override void GetDisplacement(out float3 displacement)
     {
-        _currentSpeed += _acceleration * Time.deltaTime;
-        _currentSpeed = Mathf.Clamp(_currentSpeed, 0, _maxSpeed);
+        float a = _isAccelerating ? _acceleration : -_acceleration;
+        _currentVelocity += _inputDirection * a * Time.deltaTime;
+        if (math.lengthsq(_currentVelocity) > _maxSpeed * _maxSpeed)
+        {
+            _currentVelocity = _inputDirection * _maxSpeed;
+        }
 
-        displacement = _inputDirection * _currentSpeed * Time.deltaTime;
+        displacement = _currentVelocity * Time.deltaTime;
         displacement.y = -0.1f;
     }
 

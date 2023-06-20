@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Mathematics;
 
+using TMPro;
 
 public enum PlayerMovementStateType
 { 
@@ -8,7 +9,7 @@ public enum PlayerMovementStateType
 	Dash,
 	Walking,
 	Falling,
-    GroundJumping,
+    Jumping,
 }
 
 public class PlayerMovementStateMachine : MonoBehaviour
@@ -34,6 +35,8 @@ public class PlayerMovementStateMachine : MonoBehaviour
     float3 _currentDisplacement;
 
     PlayerMovementStateType _previousStateType;
+
+    TextMeshProUGUI _stateText;
 
     void Awake()
     {
@@ -76,6 +79,8 @@ public class PlayerMovementStateMachine : MonoBehaviour
         _currentState = PlayerDelegatesContainer.GetInitialMovementState();
 
         _playerController = PlayerDelegatesContainer.GetPlayerController();
+
+        _stateText = UIDelegatesContainer.GetStateText();
     }
 
     void OnEntryNewMovementState(PlayerMovementStateType newStateType)
@@ -105,6 +110,7 @@ public class PlayerMovementStateMachine : MonoBehaviour
             return;
         }
 
+        _stateText.text = newStateType.ToString();
         _currentState.GetDisplacement(out _currentDisplacement);
         _playerController.ApplyDisplacement(_currentDisplacement);
     }
@@ -185,7 +191,7 @@ public class PlayerMovementStateMachine : MonoBehaviour
             case PlayerMovementStateType.Falling:
                 _currentState = _fallingMovementState;
                 break;
-            case PlayerMovementStateType.GroundJumping:
+            case PlayerMovementStateType.Jumping:
                 _currentState = _jumpGroundMovementState;
                 break;
         }
