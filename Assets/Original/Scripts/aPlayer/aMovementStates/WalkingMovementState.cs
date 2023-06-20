@@ -8,6 +8,8 @@ public class WalkingMovementState : PlayerMovementState
     [SerializeField]
     float _maxSpeed = 3;
 
+    const float VelocityThreshold = 0.1f;
+
     float3 _inputDirection;
     float3 _currentVelocity;
 
@@ -66,8 +68,18 @@ public class WalkingMovementState : PlayerMovementState
 
     public override void GetDisplacement(out float3 displacement)
     {
-        float a = _isAccelerating ? _acceleration : -_acceleration;
-        _currentVelocity += _inputDirection * a * Time.deltaTime;
+        if (!_isAccelerating)
+        {
+            _currentVelocity -= math.normalize(_currentVelocity) * _acceleration * Time.deltaTime;
+            if (math.lengthsq(_currentVelocity) < VelocityThreshold)
+            {
+                _currentVelocity = float3.zero;
+            }
+        }
+        else
+        { 
+            _currentVelocity += _inputDirection * _acceleration * Time.deltaTime;
+        }
         if (math.lengthsq(_currentVelocity) > _maxSpeed * _maxSpeed)
         {
             _currentVelocity = _inputDirection * _maxSpeed;
@@ -81,6 +93,7 @@ public class WalkingMovementState : PlayerMovementState
     {
         if (!_moveCommand.IsTriggered)
         {
+            _inputDirection = float3.zero;
             return false;
         }
 
