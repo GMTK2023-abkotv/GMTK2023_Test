@@ -41,7 +41,7 @@ public class WalkingMovementState : PlayerMovementState
             return true;
         }
 
-        _isAccelerating = IsInputTriggeringAbility();
+        _isAccelerating = _moveCommand.IsTriggered;
 
         if (!_isAccelerating && math.lengthsq(_currentVelocity) == 0)
         {
@@ -59,10 +59,8 @@ public class WalkingMovementState : PlayerMovementState
         return false;
     }
 
-    public override void OnTransition()
+    public override void OnEntry()
     {
-        base.OnTransition();
-
         _currentVelocity = float3.zero;
     }
 
@@ -89,37 +87,8 @@ public class WalkingMovementState : PlayerMovementState
         displacement.y = -0.1f;
     }
 
-    bool IsInputTriggeringAbility()
-    {
-        if (!_moveCommand.IsTriggered)
-        {
-            _inputDirection = float3.zero;
-            return false;
-        }
-
-        if (_moveCommand.CommandingToUp)
-        {
-            _inputDirection.z = 1;
-        }
-        if (_moveCommand.CommandingToDown)
-        {
-            _inputDirection.z = -1;
-        }
-        if (_moveCommand.CommandingToRight)
-        {
-            _inputDirection.x = 1;
-        }
-        if (_moveCommand.CommandingToLeft)
-        {
-            _inputDirection.x = -1;
-        }
-
-        _inputDirection = math.normalize(_inputDirection);
-        return true;
-    }
-
     public override string ToString()
     {
-        return "Walk ab";
+        return "Walking";
     }
 }

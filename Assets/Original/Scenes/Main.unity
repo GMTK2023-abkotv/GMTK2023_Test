@@ -442,8 +442,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _distanceOfDash: 5
-  _dashSpeed: 15
+  _startDashSpeed: 10
   _dashCoolDown: 2
+  _deceleration: 3
+  _decelerateMinSpeed: 7
 --- !u!1 &319089242
 GameObject:
   m_ObjectHideFlags: 0

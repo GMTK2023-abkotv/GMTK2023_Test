@@ -1,19 +1,23 @@
 using UnityEngine;
+using Unity.Mathematics;
+
 
 /// <summary>
 /// Does not use TriggeringKeyCode;
 /// </summary>
 public class MoveCommand : InputCommand
 {
-    public KeyCode TriggeringKeyCodeToLeft  { get; set; }
-    public KeyCode TriggeringKeyCodeToRight { get; set; }
+    public KeyCode TriggeringKeyCodeToLeft;
+    public KeyCode TriggeringKeyCodeToRight;
 
-    public KeyCode TriggeringKeyCodeToUp { get; set; }
-    public KeyCode TriggeringKeyCodeToDown { get; set; }
+    public KeyCode TriggeringKeyCodeToUp;
+    public KeyCode TriggeringKeyCodeToDown;
 
-    public bool CommandingToLeft  { get; set; }
-    public bool CommandingToRight { get; set; }
+    public bool CommandingToLeft;
+    public bool CommandingToRight;
 
-    public bool CommandingToUp { get; set; }
-    public bool CommandingToDown { get; set; }
+    public bool CommandingToUp;
+    public bool CommandingToDown;
+
+    public float3 Direction;
 }

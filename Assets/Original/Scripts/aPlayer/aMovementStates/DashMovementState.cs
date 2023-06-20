@@ -8,31 +8,34 @@ public class DashMovementState : PlayerMovementState
     float _distanceOfDash;
 
     [SerializeField]
-    float _dashSpeed;
+    float _startDashSpeed;
 
     [SerializeField]
     float _dashCoolDown = 2;
+
+    [SerializeField]
+    float _deceleration = 3;
+
+    [SerializeField]
+    float _decelerateMinSpeed = 10;
+
+    float _currentSpeed;
 
     GameObject _coolDownIndicator;
 
     float _movedDistance;
     bool _isDashExhausted;
 
-    DashCommand _dashCommandReference;
+    DashCommand _dashCommand;
+    MoveCommand _moveCommand;
 
     bool _isInCoolDown;
-    int _enteredDashThroughZonesCount;
-
     float3 _movementDirection;
     bool _isFromWalking;
 
     void Awake()
     {
-        _enteredDashThroughZonesCount = 0;
-
         PlayerDelegatesContainer.EventJustGotGrounded += OnJustGotGrounded;
-        PlayerDelegatesContainer.EventPlayerOnTriggerEnter2D += OnPlayerTriggerEnter2D;
-        PlayerDelegatesContainer.EventPlayerOnTriggerExit2D += OnPlayerTriggerExit2D;
 
         PlayerDelegatesContainer.IsDashTriggering += IsDashTriggering;
 
@@ -41,15 +44,14 @@ public class DashMovementState : PlayerMovementState
 
     void Start()
     {
-        _dashCommandReference = InputDelegatesContainer.GetDashCommand();
+        _dashCommand = InputDelegatesContainer.GetDashCommand();
+        _moveCommand = InputDelegatesContainer.GetMoveCommand();
         _coolDownIndicator = UIDelegatesContainer.GetDashCoolDownIndicator();
     }
 
     void OnDestroy()
     {
         PlayerDelegatesContainer.EventJustGotGrounded -= OnJustGotGrounded;
-        PlayerDelegatesContainer.EventPlayerOnTriggerEnter2D -= OnPlayerTriggerEnter2D;
-        PlayerDelegatesContainer.EventPlayerOnTriggerExit2D -= OnPlayerTriggerExit2D;
 
         PlayerDelegatesContainer.IsDashTriggering -= IsDashTriggering;
 
@@ -61,22 +63,6 @@ public class DashMovementState : PlayerMovementState
         if (!_isInCoolDown && _isDashExhausted)
         {
             StartCoroutine(DashCoolDown());
-        }
-    }
-
-    void OnPlayerTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.layer == LayersContainer.DASH_THROUGH_LAYER)
-        {
-            _enteredDashThroughZonesCount++;
-        }
-    }
-
-    void OnPlayerTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.layer == LayersContainer.DASH_THROUGH_LAYER)
-        { 
-            _enteredDashThroughZonesCount--;
         }
     }
 
@@ -95,6 +81,8 @@ public class DashMovementState : PlayerMovementState
         {
             _movementDirection = math.forward();
         }
+
+        _currentSpeed = _startDashSpeed;
     }
 
     public override bool CheckForTransitions()
@@ -104,25 +92,27 @@ public class DashMovementState : PlayerMovementState
             return true;
         }
 
-        if (_enteredDashThroughZonesCount == 0 && _movedDistance > _distanceOfDash)
-        { 
-            EndDashState();
+        if (_movedDistance > _distanceOfDash)
+        {
+            if (PlayerDelegatesContainer.IsGrounded())
+            {
+                if (_moveCommand.IsTriggered)
+                {
+                    PlayerDelegatesContainer.EventEntryNewMovementState?.Invoke(PlayerMovementStateType.Walking);
+                }
+                else
+                { 
+                    PlayerDelegatesContainer.EventEntryNewMovementState?.Invoke(PlayerMovementStateType.Idle);
+                }
+            }
+            else
+            {
+                PlayerDelegatesContainer.EventEntryNewMovementState?.Invoke(PlayerMovementStateType.Falling);
+            }
             return true;
         }
 
         return false;
-    }
-
-    void EndDashState()
-    { 
-        if (PlayerDelegatesContainer.IsGrounded())
-        {
-            PlayerDelegatesContainer.EventEntryNewMovementState?.Invoke(PlayerMovementStateType.Idle);
-        }
-        else
-        {
-            PlayerDelegatesContainer.EventEntryNewMovementState?.Invoke(PlayerMovementStateType.Falling);
-        }
     }
 
     public override void OnTransition()
@@ -134,8 +124,14 @@ public class DashMovementState : PlayerMovementState
     public override void GetDisplacement(out float3 displacement)
     {
         displacement = float3.zero;
-        displacement = _movementDirection * _dashSpeed * Time.deltaTime;
+        displacement = _movementDirection * _currentSpeed * Time.deltaTime;
         _movedDistance += math.length(displacement);
+
+        _currentSpeed -= _deceleration * Time.deltaTime;
+        if (_currentSpeed < _decelerateMinSpeed)
+        {
+            _currentSpeed = _decelerateMinSpeed;
+        }
     }
 
     bool IsDashTriggering()
@@ -145,7 +141,7 @@ public class DashMovementState : PlayerMovementState
             return false;
         }
 
-        if (!_dashCommandReference.IsTriggered)
+        if (!_dashCommand.IsTriggered)
         {
             return false;
         }

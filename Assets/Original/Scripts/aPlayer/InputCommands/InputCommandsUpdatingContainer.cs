@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Mathematics;
 
 [DefaultExecutionOrder(-1)]
 public class InputCommandsUpdatingContainer : MonoBehaviour
@@ -64,29 +65,7 @@ public class InputCommandsUpdatingContainer : MonoBehaviour
         }
         
         ResetCommands();
-
-        #region MovementCommandsUpdateChecking
-        if (Input.GetKey(_moveCommand.TriggeringKeyCodeToLeft))// || true)
-        { 
-            _moveCommand.IsTriggered = true;
-            _moveCommand.CommandingToLeft  = true;
-        }
-        else if (Input.GetKey(_moveCommand.TriggeringKeyCodeToRight))
-        {
-            _moveCommand.IsTriggered = true;
-            _moveCommand.CommandingToRight = true;
-        }
-
-        if (Input.GetKey(_moveCommand.TriggeringKeyCodeToDown))
-        {
-            _moveCommand.IsTriggered = true;
-            _moveCommand.CommandingToDown = true;
-        }
-        else if (Input.GetKey(_moveCommand.TriggeringKeyCodeToUp))
-        {
-            _moveCommand.IsTriggered = true;
-            _moveCommand.CommandingToUp = true;
-        }
+        UpdateMoveCommand();
 
         if (Input.GetKeyDown(_jumpCommand.TriggeringKeyCode))
         {
@@ -97,7 +76,57 @@ public class InputCommandsUpdatingContainer : MonoBehaviour
         {
             _dashCommand.IsTriggered = true;
         }
-        #endregion//MovementCommandsUpdateChecking
+
+        void UpdateMoveCommand()
+        {
+            if (Input.GetKey(_moveCommand.TriggeringKeyCodeToLeft))// || true)
+            {
+                _moveCommand.IsTriggered = true;
+                _moveCommand.CommandingToLeft = true;
+            }
+            else if (Input.GetKey(_moveCommand.TriggeringKeyCodeToRight))
+            {
+                _moveCommand.IsTriggered = true;
+                _moveCommand.CommandingToRight = true;
+            }
+
+            if (Input.GetKey(_moveCommand.TriggeringKeyCodeToDown))
+            {
+                _moveCommand.IsTriggered = true;
+                _moveCommand.CommandingToDown = true;
+            }
+            else if (Input.GetKey(_moveCommand.TriggeringKeyCodeToUp))
+            {
+                _moveCommand.IsTriggered = true;
+                _moveCommand.CommandingToUp = true;
+            }
+
+            if (_moveCommand.IsTriggered)
+            {
+                if (_moveCommand.CommandingToUp)
+                {
+                    _moveCommand.Direction.z = 1;
+                }
+                if (_moveCommand.CommandingToDown)
+                {
+                    _moveCommand.Direction.z = -1;
+                }
+                if (_moveCommand.CommandingToRight)
+                {
+                    _moveCommand.Direction.x = 1;
+                }
+                if (_moveCommand.CommandingToLeft)
+                {
+                    _moveCommand.Direction.x = -1;
+                }
+
+                _moveCommand.Direction = math.normalize(_moveCommand.Direction);
+            }
+            else
+            {
+                _moveCommand.Direction = float3.zero;
+            }
+        }
     }
 
     void ResetCommands()

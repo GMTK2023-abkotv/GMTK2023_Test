@@ -1,3 +1,0 @@
-- Switching direction not momentarily
-- Deceleration
-- After lifting button still move
