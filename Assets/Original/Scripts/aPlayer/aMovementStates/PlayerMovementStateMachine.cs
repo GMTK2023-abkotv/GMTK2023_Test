@@ -80,7 +80,6 @@ public class PlayerMovementStateMachine : MonoBehaviour
 
     void OnEntryNewMovementState(PlayerMovementStateType newStateType)
     {
-        Log(newStateType.ToString());
         _previousStateType = _currentStateType;
         _changesCountOneFrame++;
 

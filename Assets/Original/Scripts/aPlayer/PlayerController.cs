@@ -59,7 +59,6 @@ public class PlayerController : MonoBehaviour
 
     void OnGroundedIgnoranceStart()
     {
-        Debug.Log("ignoring ground");
         _ignoringGround = true;
         _isGrounded = false;
     }

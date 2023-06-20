@@ -91,7 +91,7 @@ public class DashMovementState : PlayerMovementState
         _movedDistance = 0;
         _isDashExhausted = true;
 
-        if (_isFromWalking)
+        if (!_isFromWalking)
         {
             _movementDirection = math.forward();
         }
