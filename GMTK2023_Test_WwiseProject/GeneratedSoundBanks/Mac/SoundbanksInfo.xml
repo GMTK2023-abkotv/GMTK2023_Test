@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Mac" BasePlatform="Mac" SchemaVersion="16" SoundBankVersion="145">
 	<RootPaths>
-		<ProjectRoot>../..</ProjectRoot>
-		<SourceFilesRoot>../../.cache/Mac</SourceFilesRoot>
+		<ProjectRoot>../../</ProjectRoot>
+		<SourceFilesRoot>../../.cache/Mac/</SourceFilesRoot>
 		<SoundBanksRoot>.</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
 		<ExternalSourcesOutputRoot>.</ExternalSourcesOutputRoot>
@@ -22,7 +22,7 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 		</SoundBank>
-		<SoundBank Id="3657742645" Type="User" Language="SFX" Hash="{4D3A3EFF-704C-E8C1-8398-29AD2B16CB13}">
+		<SoundBank Id="3657742645" Type="User" Language="SFX" Hash="{475351F4-9B1B-1246-017E-96C549A62FBA}">
 			<ShortName>General_SoundBank</ShortName>
 			<Path>General_SoundBank.bnk</Path>
 			<Media>
@@ -32,7 +32,7 @@
 				</File>
 				<File Id="240754933" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>MACK Liquid Splash Water Small Low.wav</ShortName>
-					<CachePath>SFX/MACK Liquid Splash Water Small Low_D50F14D4.wem</CachePath>
+					<CachePath>SFX/MACK Liquid Splash Water Small Low_0C5BBBC8.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
@@ -49,5 +49,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{086AED48-79AB-6BC4-8512-7AE042E2AAC4}</FileHash>
+	<FileHash>{F447052D-FA44-8715-028A-F021E8E7D21A}</FileHash>
 </SoundBanksInfo>
