@@ -1,10 +1,6 @@
 using UnityEngine;
 using Unity.Mathematics;
 
-
-/// <summary>
-/// Does not use TriggeringKeyCode;
-/// </summary>
 public class MoveCommand : InputCommand
 {
     public KeyCode TriggeringKeyCodeToLeft;

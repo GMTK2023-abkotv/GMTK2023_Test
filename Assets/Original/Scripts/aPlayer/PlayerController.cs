@@ -1,98 +1,115 @@
 using UnityEngine;
 using Unity.Mathematics;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    CharacterController _controller;
+    [SerializeField]
+    float _dashForceAmount;
 
-    GameObject _groundedIndicator;
-    GameObject _sidesCollisionIndicator;
+    [SerializeField]
+    float _jumpForceAmount;
 
-    bool _isGrounded;
-    bool _ignoringGround;
-    bool _isCollidedSides;
+    [SerializeField]
+    float _moveForceAmount;
+
+    [SerializeField]
+    float _dashCooldown;
+
+    float _jumpCooldown = 1;
+
+    Rigidbody _rigidBody;
+
+    MoveCommand _moveCommand;
+    JumpCommand _jumpCommand;
+    DashCommand _dashCommand;
+
+    float3 _moveDirection;
+
+    float _jumpCooldownTimer;
+    float _dashCooldownTimer;
+
+    bool _isDashTriggered;
+    bool _isJumpTriggered;
+    bool _isMoveTriggered;
 
     void Awake()
     {
-        TryGetComponent(out _controller);
-
-        PlayerDelegatesContainer.GetPlayerController += GetThis;
-
-        PlayerDelegatesContainer.IsGrounded += IsGrounded;
-        PlayerDelegatesContainer.IsCollidingSides += IsCollidingSides;
-
-        PlayerDelegatesContainer.EventGroundedIgnoranceStart += OnGroundedIgnoranceStart;
-        PlayerDelegatesContainer.EventGroundedIgnoranceEnd += OnGroundedIgnoranceEnd;
+        TryGetComponent(out _rigidBody);
     }
 
     void OnDestroy()
     {
-        PlayerDelegatesContainer.GetPlayerController -= GetThis;
-
-        PlayerDelegatesContainer.IsGrounded -= IsGrounded;
-        PlayerDelegatesContainer.IsCollidingSides -= IsCollidingSides;
-        
-        PlayerDelegatesContainer.EventGroundedIgnoranceStart -= OnGroundedIgnoranceStart;
-        PlayerDelegatesContainer.EventGroundedIgnoranceEnd -= OnGroundedIgnoranceEnd;
     }
 
     void Start()
     {
-        _groundedIndicator = UIDelegatesContainer.GetGroundedIndicator();
-        _sidesCollisionIndicator = UIDelegatesContainer.GetSidesCollisionIndicator();
+        _moveCommand = InputDelegatesContainer.GetMoveCommand();
+        _jumpCommand = InputDelegatesContainer.GetJumpCommand();
+        _dashCommand = InputDelegatesContainer.GetDashCommand();
     }
 
-    PlayerController GetThis()
+    void Update()
     {
-        return this;
-    }
+        _dashCooldownTimer -= Time.deltaTime;
+        _jumpCooldownTimer -= Time.deltaTime;
 
-    bool IsGrounded()
-    {
-        return _isGrounded;
-    }
-    bool IsCollidingSides()
-    {
-        return _isCollidedSides;
-    }
-
-    void OnGroundedIgnoranceStart()
-    {
-        _ignoringGround = true;
-        _isGrounded = false;
-    }
-
-    void OnGroundedIgnoranceEnd()
-    {
-        _ignoringGround = false;
-    }
-
-    public void ApplyDisplacement(float3 displacement)
-    {
-        CollisionFlags flags = _controller.Move(displacement);
-
-        _isCollidedSides = flags == CollisionFlags.Sides;
-        if (_sidesCollisionIndicator.activeSelf && !_isCollidedSides)
+        if (_dashCommand.IsTriggered && _dashCooldownTimer < 0)
         {
-            _sidesCollisionIndicator.SetActive(false);
-        }
-        else if (!_sidesCollisionIndicator.activeSelf && _isCollidedSides)
-        {
-            _sidesCollisionIndicator.SetActive(true);
+            _isDashTriggered = true;
+            return;
         }
 
-        if (!_ignoringGround)
+        if (_jumpCommand.IsTriggered)
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit rayHit, 1))
+            {
+                if (_jumpCooldownTimer < 0)
+                { 
+                    _isJumpTriggered = true;
+                }
+            }
+            return;
+        }
+
+        if (_moveCommand.IsTriggered)
+        {
+            _moveDirection = _moveCommand.Direction;
+            _isMoveTriggered = true;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (_isMoveTriggered && _isDashTriggered)
         { 
-            _isGrounded = flags == CollisionFlags.Below;
-            if (_groundedIndicator.activeSelf && !_isGrounded)
-            {
-                _groundedIndicator.SetActive(false);
-            }
-            else if (!_groundedIndicator.activeSelf && _isGrounded)
-            {
-                _groundedIndicator.SetActive(true);
-            }
+            ApplyForce(_dashForceAmount * _moveDirection);
+            _isMoveTriggered = false;
+            _isDashTriggered = false;
+            _isJumpTriggered = false;
+
+            _dashCooldownTimer = _dashCooldown;
+            return;
         }
+
+        if (_isJumpTriggered)
+        { 
+            ApplyForce(_jumpForceAmount * math.up());
+            _isJumpTriggered = false;
+
+            _jumpCooldownTimer = _jumpCooldown;
+            return;
+        }
+
+        if (_isMoveTriggered)
+        {
+            ApplyForce(_moveForceAmount * _moveDirection);
+            _isMoveTriggered = false;
+        }
+    }
+
+    public void ApplyForce(float3 force)
+    {
+        _rigidBody.AddForce(force);
     }
 }

@@ -139,7 +139,6 @@ public class InputCommandsUpdatingContainer : MonoBehaviour
         _moveCommand.CommandingToUp = false;
 
         _jumpCommand.IsTriggered = false;
-        _jumpCommand.IsConsumed = false;
 
         _dashCommand.IsTriggered = false;
         #endregion//MovementCommandsResetting
