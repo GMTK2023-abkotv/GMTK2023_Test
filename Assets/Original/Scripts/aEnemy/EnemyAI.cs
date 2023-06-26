@@ -1,0 +1,32 @@
+using UnityEngine;
+using Unity.Mathematics;
+
+public class EnemyAI : MotionController
+{
+    [Header("AI")]
+    [SerializeField]
+    float _followUpdateTime = 0.5f;
+
+    Transform _player;
+    Vector3 _lastPlayerPos;
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    void Start()
+    {
+        _player = PlayerDelegatesContainer.GetTransform();
+        _lastPlayerPos = _player.position;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        Vector3 dir = math.normalize(_lastPlayerPos - transform.position);
+        MoveCommand moveCommand = new() { Motion = MotionType.Walk, Direction = dir };
+        OnMoveCommand(moveCommand);
+        _lastPlayerPos = _player.position;
+    }
+}
