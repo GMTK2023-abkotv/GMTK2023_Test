@@ -18,6 +18,8 @@ public class PlayerInput : MonoBehaviour
     [SerializeField]
     KeyCode _dashKey = KeyCode.V;
 
+    const float jumpDirectionUp = 2.5f;
+
     void Update()
     {
         if (Time.timeScale == 0)
@@ -30,8 +32,15 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKeyDown(_jumpKey))
         {
             MoveCommand jumpCommand = new() { Motion = MotionType.Jump };
-            if (isWalking) jumpCommand.Direction = direction;
-            else jumpCommand.Direction = math.up();
+            if (isWalking)
+            {
+                direction.y = jumpDirectionUp;
+                jumpCommand.Direction = math.normalize(direction);
+            }
+            else 
+            {
+                jumpCommand.Direction = math.up();
+            }
             PlayerDelegatesContainer.EventMoveCommand?.Invoke(jumpCommand);
             return;
         }

@@ -29,4 +29,12 @@ public class EnemyAI : MotionController
         OnMoveCommand(moveCommand);
         _lastPlayerPos = _player.position;
     }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.layer == Layers.Holes)
+        {
+            gameObject.SetActive(false);
+        }
+    }
 }
