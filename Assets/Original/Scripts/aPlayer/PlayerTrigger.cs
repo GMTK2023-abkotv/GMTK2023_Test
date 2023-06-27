@@ -26,4 +26,13 @@ public class PlayerTrigger : MonoBehaviour
     {
         _trigger.enabled = true;
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == Layers.Holes
+            || other.gameObject.layer == Layers.Enemies)
+        {
+            PlayerDelegatesContainer.EventPlayerDead();
+        }
+    }
 }

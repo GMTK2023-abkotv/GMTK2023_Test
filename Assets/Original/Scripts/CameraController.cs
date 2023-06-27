@@ -1,5 +1,3 @@
-using System.Collections;
-
 using UnityEngine;
 
 using Cinemachine;
@@ -31,9 +29,11 @@ public class CameraController : MonoBehaviour
 
     void OnPlayerAlive()
     { 
+        
     }
 
     void OnPlayerDead()
     { 
+
     }
 }

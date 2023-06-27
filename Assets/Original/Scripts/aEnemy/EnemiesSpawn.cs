@@ -21,6 +21,8 @@ class EnemiesSpawn : MonoBehaviour
 
     IEnumerator spawnCoroutine;
 
+    List<GameObject> blobs;
+
     void Awake()
     {
         spawnPoints = new();
@@ -28,6 +30,8 @@ class EnemiesSpawn : MonoBehaviour
         {
             spawnPoints.Add(spawnPointsParent.GetChild(i));
         }
+
+        blobs = new(maxBlobsCount);
 
         PlayerDelegatesContainer.EventPlayerAlive += OnPlayerAlive;
         PlayerDelegatesContainer.EventPlayerDead += OnPlayerDead;
@@ -48,6 +52,11 @@ class EnemiesSpawn : MonoBehaviour
     void OnPlayerDead()
     {
         StopCoroutine(spawnCoroutine);
+        foreach (var gb in blobs)
+        {
+            Destroy(gb);
+        }
+        blobs.Clear();
     }
 
     // stops on player death
@@ -59,16 +68,12 @@ class EnemiesSpawn : MonoBehaviour
             lastSpawnTime += Time.deltaTime;
             if (lastSpawnTime > spawnTime)
             {
-                Spawn();
+                int rnd = Random.Range(0, spawnPoints.Count);
+                var gb = Instantiate(blobPrefab, spawnPoints[rnd].position, Quaternion.identity);
+                blobs.Add(gb);
                 lastSpawnTime = 0;
             }
             yield return null;
         }
-    }
-
-    void Spawn()
-    {
-        int rnd = Random.Range(0, spawnPoints.Count);
-        Instantiate(blobPrefab, spawnPoints[rnd].position, Quaternion.identity);
     }
 }

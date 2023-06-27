@@ -32,7 +32,7 @@ public class PlayerInput : MonoBehaviour
             MoveCommand jumpCommand = new() { Motion = MotionType.Jump };
             if (isWalking) jumpCommand.Direction = direction;
             else jumpCommand.Direction = math.up();
-            PlayerDelegatesContainer.EventMoveCommand(jumpCommand);
+            PlayerDelegatesContainer.EventMoveCommand?.Invoke(jumpCommand);
             return;
         }
 
@@ -41,7 +41,7 @@ public class PlayerInput : MonoBehaviour
             MoveCommand dashCommand = new() { Motion = MotionType.Dash };
             if (isWalking) dashCommand.Direction = direction;
             else dashCommand.Direction = math.forward();
-            PlayerDelegatesContainer.EventMoveCommand(dashCommand);
+            PlayerDelegatesContainer.EventMoveCommand?.Invoke(dashCommand);
             return;
         }
 
@@ -52,7 +52,7 @@ public class PlayerInput : MonoBehaviour
                 Motion = MotionType.Walk,
                 Direction = direction
             };
-            PlayerDelegatesContainer.EventMoveCommand(walkCommand);
+            PlayerDelegatesContainer.EventMoveCommand?.Invoke(walkCommand);
         }
 
     }

@@ -12,7 +12,7 @@ public class MotionController : MonoBehaviour
     [SerializeField]
     protected float _moveForceAmount = 4;
 
-    Rigidbody _rigidBody;
+    protected Rigidbody _rigidBody;
 
     float _jumpCooldown = 1;
     [SerializeField]
