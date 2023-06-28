@@ -49,7 +49,7 @@ public class PlayerInput : MonoBehaviour
         {
             MoveCommand dashCommand = new() { Motion = MotionType.Dash };
             if (isWalking) dashCommand.Direction = direction;
-            else dashCommand.Direction = math.forward();
+            else dashCommand.Direction = float3.zero;
             PlayerDelegatesContainer.EventMoveCommand?.Invoke(dashCommand);
             return;
         }
