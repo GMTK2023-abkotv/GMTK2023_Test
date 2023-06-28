@@ -17,11 +17,11 @@
 							<ChildrenList>
 								<AudioFileSource Name="MACK Liquid Splash Water Small Low" ID="{0A570B47-D02C-4E3D-8A31-9FB17A3F8DEE}">
 									<PropertyList>
-										<Property Name="FadeInDuration" Type="Real64" Value="0.0567243981609775"/>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.176832037049866"/>
 										<Property Name="FadeOutDuration" Type="Real64" Value="0.277661944871938"/>
 										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
 										<Property Name="TrimBegin" Type="Real64" Value="0.198535393563421"/>
-										<Property Name="TrimEnd" Type="Real64" Value="1.12948612150496"/>
+										<Property Name="TrimEnd" Type="Real64" Value="0.820637907219246"/>
 									</PropertyList>
 									<Language>SFX</Language>
 									<AudioFile>MACK Liquid Splash Water Small Low.wav</AudioFile>
