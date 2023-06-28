@@ -3,10 +3,6 @@ using Unity.Mathematics;
 
 public class EnemyAI : MotionController
 {
-    [Header("AI")]
-    [SerializeField]
-    float _followUpdateTime = 0.5f;
-
     Transform _player;
     Vector3 _lastPlayerPos;
     protected override void Awake()

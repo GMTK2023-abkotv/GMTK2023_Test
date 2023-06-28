@@ -38,7 +38,7 @@ public class MotionController : MonoBehaviour
                 {
                     if (math.all(newCommand.Direction == float3.zero))
                     { 
-                        newCommand.Direction = _rigidBody.velocity;
+                        newCommand.Direction = math.normalize(_rigidBody.velocity);
                     }
                     _command = newCommand;
                 }
