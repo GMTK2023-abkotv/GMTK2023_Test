@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -28,22 +29,34 @@ public class MotionController : MonoBehaviour
         TryGetComponent(out _rigidBody);
     }
 
-    protected void OnMoveCommand(MoveCommand command)
+    protected void OnMoveCommand(MoveCommand newCommand)
     {
-        switch (command.Motion)
+        switch (newCommand.Motion)
         {
             case MotionType.Dash:
-                if (_dashCooldownTimer < 0) _command = command;
+                if (_dashCooldownTimer < 0)
+                {
+                    if (math.all(newCommand.Direction == float3.zero))
+                    { 
+                        newCommand.Direction = _rigidBody.velocity;
+                    }
+                    _command = newCommand;
+                }
                 break;
             case MotionType.Jump:
                 if (_jumpCooldownTimer < 0 &&
                     Physics.Raycast(transform.position, Vector3.down, out RaycastHit rayHit, 1))
                 {
-                    _command = command;
+                    _command = newCommand;
                 }
                 break;
             case MotionType.Walk:
-                _command = command;
+                if (_command.Motion == MotionType.Nihil)
+                {
+                    _command.Motion = MotionType.Walk;
+                }
+                float3 dir = new float3(newCommand.Direction.x, _command.Direction.y, newCommand.Direction.z);
+                _command.Direction = math.normalizesafe(dir);
                 break;
         }
     }
