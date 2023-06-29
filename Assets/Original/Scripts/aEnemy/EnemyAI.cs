@@ -1,13 +1,18 @@
+using System.Collections;
 using UnityEngine;
 using Unity.Mathematics;
 
 public class EnemyAI : MotionController
 {
+    [SerializeField]
+    Collider _death;
+
     Transform _player;
     Vector3 _lastPlayerPos;
     protected override void Awake()
     {
         base.Awake();
+        _death.enabled = false;
     }
 
     void Start()
@@ -28,9 +33,17 @@ public class EnemyAI : MotionController
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.layer == Layers.Holes)
+        if (collider.gameObject.layer == Layers.Player)
         {
-            gameObject.SetActive(false);
+            _moveForceAmount += 300;
+            StartCoroutine(Death());
         }
+    }
+
+    IEnumerator Death()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _death.enabled = true;
+        Debug.Log("enable death");
     }
 }

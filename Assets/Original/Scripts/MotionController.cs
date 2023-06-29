@@ -53,10 +53,16 @@ public class MotionController : MonoBehaviour
             case MotionType.Walk:
                 if (_command.Motion == MotionType.Nihil)
                 {
-                    _command.Motion = MotionType.Walk;
+                    _command = newCommand;
+                    return;
                 }
-                float3 dir = new float3(newCommand.Direction.x, _command.Direction.y, newCommand.Direction.z);
-                _command.Direction = math.normalizesafe(dir);
+                
+                if (_command.Motion == MotionType.Dash)
+                { 
+                    float3 dir = new float3(newCommand.Direction.x, 0, newCommand.Direction.z);
+                    _command.Direction = math.normalizesafe(dir);
+                    return;
+                }
                 break;
         }
     }

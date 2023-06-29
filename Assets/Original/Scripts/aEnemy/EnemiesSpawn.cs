@@ -66,7 +66,7 @@ class EnemiesSpawn : MonoBehaviour
         while (true)
         { 
             lastSpawnTime += Time.deltaTime;
-            if (lastSpawnTime > spawnTime)
+            if (lastSpawnTime > spawnTime && blobs.Count < maxBlobsCount)
             {
                 int rnd = Random.Range(0, spawnPoints.Count);
                 var gb = Instantiate(blobPrefab, spawnPoints[rnd].position, Quaternion.identity);

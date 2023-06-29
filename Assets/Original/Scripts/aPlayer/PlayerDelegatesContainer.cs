@@ -13,4 +13,5 @@ public static class PlayerDelegatesContainer
 
     public static Action EventPlayerAlive;
     public static Action EventPlayerDead;
+    public static Action EventPlayerCapture;
 }
