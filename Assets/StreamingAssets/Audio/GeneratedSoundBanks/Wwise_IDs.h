@@ -14,7 +14,7 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID MUSIC = 3991942870U;
-        static const AkUniqueID PLAYER_MOVEMENT = 541470702U;
+        static const AkUniqueID PLAYER_DASH = 2394582229U;
     } // namespace EVENTS
 
     namespace BANKS

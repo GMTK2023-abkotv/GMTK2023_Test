@@ -22,7 +22,7 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 		</SoundBank>
-		<SoundBank Id="3657742645" Type="User" Language="SFX" Hash="{475351F4-9B1B-1246-017E-96C549A62FBA}">
+		<SoundBank Id="3657742645" Type="User" Language="SFX" Hash="{5AA4B5F2-D6E8-CCAE-52A6-FC493D33949A}">
 			<ShortName>General_SoundBank</ShortName>
 			<Path>General_SoundBank.bnk</Path>
 			<Media>
@@ -32,7 +32,19 @@
 				</File>
 				<File Id="240754933" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>MACK Liquid Splash Water Small Low.wav</ShortName>
-					<CachePath>SFX/MACK Liquid Splash Water Small Low_0C5BBBC8.wem</CachePath>
+					<CachePath>SFX/MACK Liquid Splash Water Small Low_703039FC.wem</CachePath>
+				</File>
+				<File Id="258053250" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MACK Liquid Splash Water Small Low.wav</ShortName>
+					<CachePath>SFX/MACK Liquid Splash Water Small Low_B885E95C.wem</CachePath>
+				</File>
+				<File Id="588020897" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MACK Liquid Splash Water Small Low.wav</ShortName>
+					<CachePath>SFX/MACK Liquid Splash Water Small Low_750BB3C2.wem</CachePath>
+				</File>
+				<File Id="1008999194" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MACK Liquid Splash Water Small Low.wav</ShortName>
+					<CachePath>SFX/MACK Liquid Splash Water Small Low_E85A70DC.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
@@ -41,13 +53,16 @@
 						<MediaRef Id="79360283"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="541470702" Name="Player_Movement" DurationType="OneShot" DurationMin="0.9309507" DurationMax="0.9309507">
+				<Event Id="2394582229" Name="Player_Dash" DurationType="OneShot" DurationMin="0.46764743" DurationMax="1.1656911">
 					<MediaRefs>
 						<MediaRef Id="240754933"/>
+						<MediaRef Id="258053250"/>
+						<MediaRef Id="588020897"/>
+						<MediaRef Id="1008999194"/>
 					</MediaRefs>
 				</Event>
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{C479A959-4468-78D7-F505-9160FECAFEF8}</FileHash>
+	<FileHash>{7B111B60-BF14-B9D3-530E-929E08994307}</FileHash>
 </SoundBanksInfo>

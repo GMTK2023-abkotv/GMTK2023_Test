@@ -6,7 +6,8 @@
 				<MusicSegment Name="Test Music" ID="{BF58D786-2981-467D-A87C-FDADA5AF90C8}" ShortID="81396198">
 					<PropertyList>
 						<Property Name="3DSpatialization" Type="int16" Value="1"/>
-						<Property Name="EndPosition" Type="Real64" Value="484576.961451247"/>
+						<Property Name="EndPosition" Type="Real64" Value="794149.384156763"/>
+						<Property Name="Tempo" Type="Real64" Value="118"/>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
 								<Value>-18</Value>
@@ -59,11 +60,72 @@
 															<Local>
 																<MusicClip Name="Plaia 42" ID="{E0C1DE49-B219-465F-A187-5729140FF64B}">
 																	<PropertyList>
+																		<Property Name="BeginTrimOffset" Type="Real64" Value="1.65869096235838E-10"/>
 																		<Property Name="EndTrimOffset" Type="Real64" Value="484576.961451247"/>
 																		<Property Name="FadeInMode" Type="int16" Value="0"/>
 																		<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																		<Property Name="PlayAt" Type="Real64" Value="-1.65869096235838E-10"/>
 																	</PropertyList>
 																	<AudioSourceRef Name="Plaia 42" ID="{38FEFCD7-B5B8-485C-8AA8-E0033B4C2FAE}"/>
+																	<PropertyCurveList>
+																		<PropertyCurve PropertyName="Highpass">
+																			<Curve Name="" ID="{D44516AF-4018-4103-8D35-03CE8327136C}">
+																				<PropertyList>
+																					<Property Name="Flags" Type="int32" Value="1"/>
+																				</PropertyList>
+																				<PointList>
+																					<Point>
+																						<XPos>0</XPos>
+																						<YPos>0</YPos>
+																						<Flags>5</Flags>
+																					</Point>
+																					<Point>
+																						<XPos>484.576961451247</XPos>
+																						<YPos>0</YPos>
+																						<Flags>37</Flags>
+																					</Point>
+																				</PointList>
+																			</Curve>
+																		</PropertyCurve>
+																		<PropertyCurve PropertyName="Lowpass">
+																			<Curve Name="" ID="{89D92EDA-4E79-4252-8DBB-9F167F10EBFC}">
+																				<PropertyList>
+																					<Property Name="Flags" Type="int32" Value="1"/>
+																				</PropertyList>
+																				<PointList>
+																					<Point>
+																						<XPos>0</XPos>
+																						<YPos>0</YPos>
+																						<Flags>5</Flags>
+																					</Point>
+																					<Point>
+																						<XPos>484.576961451247</XPos>
+																						<YPos>0</YPos>
+																						<Flags>37</Flags>
+																					</Point>
+																				</PointList>
+																			</Curve>
+																		</PropertyCurve>
+																		<PropertyCurve PropertyName="Volume">
+																			<Curve Name="" ID="{EB1B6990-4F2B-41AF-9321-41A0B33D665B}">
+																				<PropertyList>
+																					<Property Name="Flags" Type="int32" Value="3"/>
+																				</PropertyList>
+																				<PointList>
+																					<Point>
+																						<XPos>0</XPos>
+																						<YPos>0</YPos>
+																						<Flags>5</Flags>
+																					</Point>
+																					<Point>
+																						<XPos>484.576961451247</XPos>
+																						<YPos>0</YPos>
+																						<Flags>37</Flags>
+																					</Point>
+																				</PointList>
+																			</Curve>
+																		</PropertyCurve>
+																	</PropertyCurveList>
 																</MusicClip>
 															</Local>
 														</Reference>
@@ -88,7 +150,7 @@
 									<MusicCue Name="Exit Cue" ID="{0523BA05-BAA3-4F31-B937-3B8C74334A98}">
 										<PropertyList>
 											<Property Name="CueType" Type="int16" Value="1"/>
-											<Property Name="TimeMs" Type="Real64" Value="1000"/>
+											<Property Name="TimeMs" Type="Real64" Value="484576.961451246"/>
 										</PropertyList>
 									</MusicCue>
 								</Local>
