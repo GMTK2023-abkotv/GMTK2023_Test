@@ -161,6 +161,11 @@
 										<Value>230</Value>
 									</ValueList>
 								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>4</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -216,7 +221,7 @@
 							<ChildrenList>
 								<AudioFileSource Name="Surreal-MarbleRolling-ECU-D" ID="{970DD472-E934-4A2B-AFB4-C35D09FEE035}">
 									<PropertyList>
-										<Property Name="FadeInDuration" Type="Real64" Value="1.07704252998909"/>
+										<Property Name="FadeInDuration" Type="Real64" Value="4.55091265985922"/>
 										<Property Name="FadeOutDuration" Type="Real64" Value="0.942412213740454"/>
 										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
 										<Property Name="TrimBegin" Type="Real64" Value="1.34630316248637"/>

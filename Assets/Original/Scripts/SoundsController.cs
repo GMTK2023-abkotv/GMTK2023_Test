@@ -3,13 +3,13 @@ using UnityEngine;
 public class SoundsController : MonoBehaviour
 {
     [SerializeField]
-    string walkSound;
+    AK.Wwise.Event Roll;
 
     [SerializeField]
     string jumpSound;
 
     [SerializeField]
-    string dashSound;
+    AK.Wwise.Event Dash;
 
     MotionController motionController;
 
@@ -20,7 +20,7 @@ public class SoundsController : MonoBehaviour
         motionController.OnStartWalk += StartWalk;
         motionController.OnStopWalk += StopWalk;
         motionController.OnJump += Jump;
-        motionController.OnDash += Dash;
+        motionController.OnDash += PlayDash;
     }
 
     void OnDestroy()
@@ -28,17 +28,17 @@ public class SoundsController : MonoBehaviour
         motionController.OnStartWalk -= StartWalk;
         motionController.OnStopWalk -= StopWalk;
         motionController.OnJump -= Jump;
-        motionController.OnDash -= Dash;
+        motionController.OnDash -= PlayDash;
     }
 
     void StartWalk()
     {
-        // start walk sound
+        Roll.Post(gameObject);
     }
 
     void StopWalk()
     {
-        // stop walk sound
+   
     }
 
     void Jump()
@@ -46,8 +46,8 @@ public class SoundsController : MonoBehaviour
 
     }
 
-    void Dash()
-    { 
-
+    void PlayDash()
+    {
+        Dash.Post(gameObject);
     }
 }

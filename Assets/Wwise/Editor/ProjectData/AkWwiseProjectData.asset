@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: 9862869bfeea314baad8b4c95d13e67e
     GuidInternal: 
-    m_lastTime: -8585145215351854351
+    m_lastTime: -8585131477324154684
     List:
     - name: General_SoundBank
       guid: 4562352cea8b4b409e56e37c7d26d464
@@ -94,7 +94,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: abc33021d8920341964bdaf82da6ec1d
     GuidInternal: 
-    m_lastTime: -8585131839523295705
+    m_lastTime: -8585131464712715267
     List:
     - name: Music
       guid: 0dbe508473740e439167e5a22447defb
@@ -133,8 +133,28 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
-    - name: Player_Movement
+    - name: Player_Dash
       guid: 4fb3209759d3b34080fb1d4e2070adcc
+      id: 2394582229
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: abc33021d8920341964bdaf82da6ec1d
+      - ElementName: Player
+        ObjectType: 4
+        guid: 0f4cd40206164e4586f105988967e114
+      - ElementName: Player_Dash
+        ObjectType: 3
+        guid: 4fb3209759d3b34080fb1d4e2070adcc
+      Path: Events\Default Work Unit\Player\Player_Dash
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Player_Movement
+      guid: e048db2c157b7944b3362a5818cd7d8c
       id: 541470702
       PathAndIcons:
       - ElementName: Events
@@ -148,7 +168,7 @@ MonoBehaviour:
         guid: 0f4cd40206164e4586f105988967e114
       - ElementName: Player_Movement
         ObjectType: 3
-        guid: 4fb3209759d3b34080fb1d4e2070adcc
+        guid: e048db2c157b7944b3362a5818cd7d8c
       Path: Events\Default Work Unit\Player\Player_Movement
       maxAttenuation: 0
       maxDuration: -1

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e82e2770c0e9c48088e95ec90e557327, type: 3}
-  m_Name: 9720B34F-D359-40B3-80FB-1D4E2070ADCC
+  m_Name: 2CDB48E0-7B15-4479-B336-2A5818CD7D8C
   m_EditorClassIdentifier: 
-  objectName: Player_Dash
-  id: 2394582229
-  guid: 9720B34F-D359-40B3-80FB-1D4E2070ADCC
+  objectName: Player_Movement
+  id: 541470702
+  guid: 2CDB48E0-7B15-4479-B336-2A5818CD7D8C
