@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -23,6 +24,13 @@ public class MotionController : MonoBehaviour
     float _dashCooldownTimer;
 
     MoveCommand _command;
+
+    bool isWalking;
+
+    public Action OnStartWalk;
+    public Action OnStopWalk;
+    public Action OnJump;
+    public Action OnDash;
 
     protected virtual void Awake()
     {
@@ -74,13 +82,27 @@ public class MotionController : MonoBehaviour
             case MotionType.Dash:
                 _rigidBody.AddForce(_dashForceAmount * _command.Direction);
                 _dashCooldownTimer = _dashCooldown;
+                OnDash?.Invoke();
                 break;
             case MotionType.Jump:
                 _rigidBody.AddForce(_jumpForceAmount * _command.Direction);
                 _jumpCooldownTimer = _jumpCooldown;
+                OnJump?.Invoke();
                 break;
             case MotionType.Walk:
                 _rigidBody.AddForce(_moveForceAmount * _command.Direction);
+                if (!isWalking)
+                {
+                    isWalking = true;
+                    OnStartWalk?.Invoke();
+                }
+                break;
+            case MotionType.Nihil:
+                if (isWalking)
+                {
+                    isWalking = false;
+                    OnStopWalk?.Invoke();
+                }
                 break;
         }
         _command.Motion = MotionType.Nihil;

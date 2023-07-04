@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 307230182}
   - component: {fileID: 307230181}
   - component: {fileID: 307230180}
+  - component: {fileID: 307230184}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -260,6 +261,7 @@ MonoBehaviour:
   _jumpForceAmount: 400
   _moveForceAmount: 4
   _dashCooldown: 3
+  start: {fileID: 0}
 --- !u!54 &307230178
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -372,6 +374,21 @@ MonoBehaviour:
   _moveUpKey: 119
   _jumpKey: 32
   _dashKey: 118
+--- !u!114 &307230184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307230172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1490859c29a34a2db7e784240479e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSound: 
+  jumpSound: 
+  dashSound: 
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
