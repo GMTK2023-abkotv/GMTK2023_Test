@@ -100,8 +100,8 @@ public class MotionController : MonoBehaviour
             case MotionType.Nihil:
                 if (isWalking)
                 {
-                   // isWalking = false;
-                   // OnStopWalk?.Invoke();
+                    isWalking = false;
+                    OnStopWalk?.Invoke();
                 }
                 break;
         }

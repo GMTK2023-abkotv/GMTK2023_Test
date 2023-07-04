@@ -36,6 +36,35 @@
 										</Reference>
 									</ReferenceList>
 								</Action>
+								<Action Name="" ID="{7759F843-0801-4A2C-9A94-4CBB8BDCE708}" ShortID="565211214">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="Inclusion" Type="bool">
+											<ValueList>
+												<Value>False</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Rool_Move" ID="{8D7141CC-D64D-4A54-8DC7-A9ED51F6E4C6}" WorkUnitID="{48CBBF14-BD6E-49D2-87ED-D37DE95D2A82}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Player_Stops" ID="{8701A735-3613-4B14-A9BE-48C6DB4E3FA4}">
+							<ChildrenList>
+								<Action Name="" ID="{EFBF69C6-A39E-4D27-9013-09DCFDF3D8C5}" ShortID="72637443">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Rool_Move" ID="{8D7141CC-D64D-4A54-8DC7-A9ED51F6E4C6}" WorkUnitID="{48CBBF14-BD6E-49D2-87ED-D37DE95D2A82}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
 							</ChildrenList>
 						</Event>
 					</ChildrenList>

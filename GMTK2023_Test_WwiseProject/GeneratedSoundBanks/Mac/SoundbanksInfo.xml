@@ -22,7 +22,7 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 		</SoundBank>
-		<SoundBank Id="3657742645" Type="User" Language="SFX" Hash="{5AA4B5F2-D6E8-CCAE-52A6-FC493D33949A}">
+		<SoundBank Id="3657742645" Type="User" Language="SFX" Hash="{1C57F081-69FC-BBDB-C128-008AF4EC9EC4}">
 			<ShortName>General_SoundBank</ShortName>
 			<Path>General_SoundBank.bnk</Path>
 			<Media>
@@ -37,6 +37,10 @@
 				<File Id="258053250" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>MACK Liquid Splash Water Small Low.wav</ShortName>
 					<CachePath>SFX/MACK Liquid Splash Water Small Low_B885E95C.wem</CachePath>
+				</File>
+				<File Id="264992092" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Surreal-MarbleRolling-ECU-D.wav</ShortName>
+					<CachePath>SFX/Surreal-MarbleRolling-ECU-D_69F1D1B4.wem</CachePath>
 				</File>
 				<File Id="588020897" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>MACK Liquid Splash Water Small Low.wav</ShortName>
@@ -61,8 +65,13 @@
 						<MediaRef Id="1008999194"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="541470702" Name="Player_Movement" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="264992092"/>
+					</MediaRefs>
+				</Event>
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{A38DCE48-593B-EDBD-3F00-D792F08C3D4E}</FileHash>
+	<FileHash>{44BEC6E2-2A44-CD9B-E93A-57FE21976249}</FileHash>
 </SoundBanksInfo>

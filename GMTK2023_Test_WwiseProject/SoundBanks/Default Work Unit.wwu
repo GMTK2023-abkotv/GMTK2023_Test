@@ -7,6 +7,7 @@
 					<ObjectInclusionList>
 						<ObjectRef Name="Player_Dash" ID="{9720B34F-D359-40B3-80FB-1D4E2070ADCC}" WorkUnitID="{2130C3AB-92D8-4103-964B-DAF82DA6EC1D}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Music" ID="{8450BE0D-7473-430E-9167-E5A22447DEFB}" WorkUnitID="{2130C3AB-92D8-4103-964B-DAF82DA6EC1D}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Player_Movement" ID="{2CDB48E0-7B15-4479-B336-2A5818CD7D8C}" WorkUnitID="{2130C3AB-92D8-4103-964B-DAF82DA6EC1D}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

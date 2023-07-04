@@ -38,7 +38,7 @@ public class SoundsController : MonoBehaviour
 
     void StopWalk()
     {
-   
+        Roll.ExecuteAction(gameObject, AkActionOnEventType.AkActionOnEventType_Stop, 950, AkCurveInterpolation.AkCurveInterpolation_Linear);
     }
 
     void Jump()
